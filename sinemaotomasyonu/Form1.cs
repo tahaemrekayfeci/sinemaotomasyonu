@@ -15,9 +15,11 @@ namespace sinemaotomasyonu
         public Form1()
         {
             InitializeComponent();
+            
         }
-        int bilet,indirim;
+        int bilet,salon; 
         int[] koltuk = new int[4];
+       
         
 
 
@@ -28,67 +30,56 @@ namespace sinemaotomasyonu
 
         private void btn_biletsat_Click(object sender, EventArgs e)
         {
-            
+            koltuk[salon] = koltuk[salon] - 1;
            
-            
-                koltuk[int.Parse(txt_salon.Text)] = koltuk[int.Parse(txt_salon.Text)] - int.Parse(txt_koltuk.Text);
-                if (koltuk[int.Parse(txt_salon.Text)] > 0)
-                {
-                    bilet = int.Parse(txt_koltuk.Text) * 40;
-                    if (cbx_indirim.Checked == true)
-                    {
-                        indirim = (bilet * 20) / 100;
-                        bilet = bilet - indirim;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Koltuk Sayısı Yeterince Yok!");
-                }
-            
-          
-            
-
-
+            salon = int.Parse(txt_salon.Text);
+            if (cbx_indirim.Checked ==true)
+            {
+                bilet = bilet + 10;
+            }
+            else
+            {
+                bilet = bilet + 20;
+            }
         }
 
         private void btn_boskoltuk_Click(object sender, EventArgs e)
         {
-            lbl_sayi.Text = koltuk[int.Parse(txt_salon.Text)].ToString();
+            salon = int.Parse(txt_salon.Text);
+            lbl_sayi.Text = koltuk[salon].ToString();
         }
 
         private void btn_olustur_Click(object sender, EventArgs e)
         {
-            koltuk[int.Parse(txt_salon.Text)] = koltuk[int.Parse(txt_salon.Text)] + int.Parse(txt_koltuk.Text);
+            salon = int.Parse(txt_salon.Text);
+            koltuk[salon] = koltuk[salon] + int.Parse(txt_koltuk.Text);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
              
-            koltuk[1] = 30;
-            koltuk[2] = 30;
-            koltuk[3] = 30;
+           
+            
         }
 
         private void btn_bakiye_Click(object sender, EventArgs e)
         {
+            salon = int.Parse(txt_salon.Text);
             MessageBox.Show("Sinema'nın Bakiyesi = "+bilet);
         }
 
         private void btn_biletiptal_Click(object sender, EventArgs e)
         {
-            koltuk[int.Parse(txt_salon.Text)] =koltuk[int.Parse(txt_salon.Text)] + int.Parse(txt_koltuk.Text);
-            if (koltuk[int.Parse(txt_salon.Text)] > 0 )
+            salon = int.Parse(txt_salon.Text);
+            koltuk[salon] = koltuk[salon] + 1;
+         
+            if (cbx_indirim.Checked == true)
             {
-                bilet = int.Parse(txt_koltuk.Text) / 40;
-                if (cbx_indirim.Checked == true)
-                {
-                    bilet = indirim + bilet;
-                }
+                bilet = bilet - 10;
             }
             else
             {
-                MessageBox.Show("Koltuk Sayısı Yeterince Yok!");
+                bilet = bilet - 20;
             }
 
         }
